@@ -1,0 +1,28 @@
+[Unit]
+Description=Nesquate's Minecraft Server (Main)
+
+Wants=network.target
+After=network.target
+
+[Service]
+Type=forking
+User=mc-nesquate
+Group=mc-nesquate
+Nice=5
+TimeoutStopSec=90
+
+ProtectHome=read-only
+ProtectSystem=full
+PrivateDevices=no
+NoNewPrivileges=yes
+PrivateTmp=no
+InaccessiblePaths=/root /sys /srv -/opt /media -/lost+found
+ReadWritePaths=/home/mc-nesquate/server-main
+WorkingDirectory=/home/mc-nesquate/server-main
+PIDFile=/home/mc-nesquate/server-main/main-server.pid
+ExecStart=/home/mc-nesquate/server-main/service.sh start
+ExecReload=/home/mc-nesquate/server-main/service.sh reload
+ExecStop=/home/mc-nesquate/server-main/service.sh stop
+
+[Install]
+WantedBy=multi-user.target
